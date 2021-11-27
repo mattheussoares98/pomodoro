@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mob_x/store/pomodoro_store.dart';
+import 'package:provider/provider.dart';
+
+import 'botao_adicionar_tirar_tempo.dart';
 
 class EntradaTempo extends StatelessWidget {
   final int valor;
   final String titulo;
+  final void Function()? inc;
+  final void Function()? dec;
   const EntradaTempo({
     required this.valor,
     required this.titulo,
+    this.inc,
+    this.dec,
     Key? key,
   }) : super(key: key);
 
@@ -23,35 +31,19 @@ class EntradaTempo extends StatelessWidget {
         ),
         Row(
           children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: const Icon(
-                Icons.arrow_downward,
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(15),
-                primary: Colors.red,
-              ),
+            BotaoMudarTempo(
+              onPressed: dec!,
+              icone: Icons.arrow_downward,
             ),
-            const SizedBox(width: 10),
             Text(
               '$valor min',
               style: const TextStyle(
                 fontSize: 18,
               ),
             ),
-            const SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Icon(
-                Icons.arrow_upward,
-              ),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(15),
-                primary: Colors.red,
-              ),
+            BotaoMudarTempo(
+              onPressed: inc!,
+              icone: Icons.arrow_upward,
             ),
           ],
         ),
