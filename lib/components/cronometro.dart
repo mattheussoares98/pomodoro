@@ -11,27 +11,31 @@ class Cronometro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<PomodoroStore>(context);
-    return Container(
-      color: Colors.red,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Hora de trabalhar',
-            style: TextStyle(
-              fontSize: 40,
-              color: Colors.white,
+    return Observer(
+      builder: (_) => Container(
+        color: store.estaDescansando() ? Colors.green : Colors.red,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              store.estaTrabalhando()
+                  ? 'Hora de trabalhar'
+                  : 'Hora de descansar',
+              style: const TextStyle(
+                fontSize: 40,
+                color: Colors.white,
+              ),
             ),
-          ),
-          Text(
-            '${store.minutos.toString().padLeft(2, '0')}:${store.segundos.toString().padLeft(2, '0')}',
-            style: const TextStyle(
-              fontSize: 120,
-              color: Colors.white,
+            FittedBox(
+              child: Text(
+                '${store.minutos.toString().padLeft(2, '0')}:${store.segundos.toString().padLeft(2, '0')}',
+                style: const TextStyle(
+                  fontSize: 120,
+                  color: Colors.white,
+                ),
+              ),
             ),
-          ),
-          Observer(
-            builder: (_) => Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (!store.iniciado)
@@ -62,8 +66,19 @@ class Cronometro extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     CronometroBotao(
+            //       icone: store.estaTrabalhando() ? Icons.bedtime : Icons.work,
+            //       nomeBotao:
+            //           store.estaTrabalhando() ? 'Descansar' : 'Trabalhar',
+            //       click: store.trocarTipoIntervalo,
+            //     ),
+            //   ],
+            // ),
+          ],
+        ),
       ),
     );
   }

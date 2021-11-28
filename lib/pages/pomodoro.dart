@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mob_x/components/cronometro_botao.dart';
 import 'package:mob_x/components/cronometro.dart';
 import 'package:mob_x/components/entrada_tempo.dart';
 import 'package:mob_x/store/pomodoro_store.dart';
@@ -12,6 +11,7 @@ class Pomodoro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<PomodoroStore>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -29,14 +29,22 @@ class Pomodoro extends StatelessWidget {
                     EntradaTempo(
                       valor: store.tempoTrabalho,
                       titulo: 'Trabalho',
-                      inc: store.incrementarTrabalho,
-                      dec: store.decrementarTrabalho,
+                      inc: store.estaTrabalhando() && store.iniciado
+                          ? null
+                          : store.incrementarTrabalho,
+                      dec: store.estaTrabalhando() && store.iniciado
+                          ? null
+                          : store.decrementarTrabalho,
                     ),
                     EntradaTempo(
                       valor: store.tempoDescanso,
                       titulo: 'Descanso',
-                      inc: store.incrementarDescanso,
-                      dec: store.decrementarDescanso,
+                      inc: store.estaDescansando() && store.iniciado
+                          ? null
+                          : store.incrementarDescanso,
+                      dec: store.estaDescansando() && store.iniciado
+                          ? null
+                          : store.decrementarDescanso,
                     ),
                   ],
                 ),

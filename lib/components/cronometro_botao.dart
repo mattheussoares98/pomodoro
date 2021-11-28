@@ -20,6 +20,7 @@ class CronometroBotao extends StatelessWidget {
           Icon(
             icone,
           ),
+          const SizedBox(width: 10),
           Text(nomeBotao),
         ],
       ),

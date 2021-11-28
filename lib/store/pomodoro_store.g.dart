@@ -9,6 +9,21 @@ part of 'pomodoro_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PomodoroStore on _PomodoroStore, Store {
+  final _$tipoTrabalhoAtom = Atom(name: '_PomodoroStore.tipoTrabalho');
+
+  @override
+  TipoTrabalho get tipoTrabalho {
+    _$tipoTrabalhoAtom.reportRead();
+    return super.tipoTrabalho;
+  }
+
+  @override
+  set tipoTrabalho(TipoTrabalho value) {
+    _$tipoTrabalhoAtom.reportWrite(value, super.tipoTrabalho, () {
+      super.tipoTrabalho = value;
+    });
+  }
+
   final _$iniciadoAtom = Atom(name: '_PomodoroStore.iniciado');
 
   @override
@@ -167,6 +182,7 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
   @override
   String toString() {
     return '''
+tipoTrabalho: ${tipoTrabalho},
 iniciado: ${iniciado},
 tempoDescanso: ${tempoDescanso},
 minutos: ${minutos},

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mob_x/store/pomodoro_store.dart';
-import 'package:provider/provider.dart';
 
 import 'botao_adicionar_tirar_tempo.dart';
 
@@ -32,7 +30,7 @@ class EntradaTempo extends StatelessWidget {
         Row(
           children: [
             BotaoMudarTempo(
-              onPressed: dec!,
+              onPressed: dec,
               icone: Icons.arrow_downward,
             ),
             Text(
@@ -42,7 +40,7 @@ class EntradaTempo extends StatelessWidget {
               ),
             ),
             BotaoMudarTempo(
-              onPressed: inc!,
+              onPressed: inc,
               icone: Icons.arrow_upward,
             ),
           ],
